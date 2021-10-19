@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class HaselcastGraphServiceApplication
+class HazelcastGraphServiceApplication
 
 fun main(args: Array<String>) {
-    runApplication<HaselcastGraphServiceApplication>(*args)
+    runApplication<HazelcastGraphServiceApplication>(*args)
 }
