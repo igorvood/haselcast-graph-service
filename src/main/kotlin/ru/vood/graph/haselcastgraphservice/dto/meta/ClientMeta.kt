@@ -2,7 +2,6 @@ package ru.vood.graph.haselcastgraphservice.dto.meta
 
 import ru.vood.graph.haselcastgraphservice.dto.ClientJob
 import ru.vood.graph.haselcastgraphservice.dto.dsl.MetaEntity
-import ru.vood.graph.haselcastgraphservice.dto.dsl.StandardFunction
 import ru.vood.graph.haselcastgraphservice.dto.dsl.StandardFunction.genEntityData
 import ru.vood.graph.haselcastgraphservice.dto.dsl.StandardFunction.stdBool
 import ru.vood.graph.haselcastgraphservice.dto.dsl.StandardFunction.stdDate
