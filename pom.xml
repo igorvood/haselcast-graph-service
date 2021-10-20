@@ -23,6 +23,21 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>com.hazelcast.jet.contrib</groupId>-->
+<!--            <artifactId>hazelcast-jet-spring-boot-starter</artifactId>-->
+<!--            <version>2.0.1</version>-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>com.hazelcast.jet.examples</groupId>
+            <artifactId>hazelcast-jet-examples-trade-source</artifactId>
+            <version>4.5.1</version>
+        </dependency>
+
+<!--        implementation 'com.hazelcast.jet.examples:hazelcast-jet-examples-trade-source:4.5.1'-->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-groovy-templates</artifactId>
@@ -35,8 +50,27 @@
         <dependency>
             <groupId>com.hazelcast.jet</groupId>
             <artifactId>hazelcast-jet</artifactId>
-            <version>4.3</version>
+            <version>4.5.1</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.hazelcast.jet</groupId>
+            <artifactId>hazelcast-jet-kafka</artifactId>
+            <version>4.5.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.hazelcast.jet</groupId>
+            <artifactId>hazelcast-jet-cdc-postgres</artifactId>
+            <version>4.5.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.hazelcast.jet</groupId>
+            <artifactId>hazelcast-jet-cdc-debezium</artifactId>
+            <version>4.5.1</version>
+        </dependency>
+
 
         <dependency>
             <groupId>com.google.code.gson</groupId>
