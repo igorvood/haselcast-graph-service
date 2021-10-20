@@ -6,35 +6,52 @@ import com.hazelcast.jet.pipeline.Sinks
 import com.hazelcast.jet.pipeline.Sources
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+import ru.vood.graph.haselcastgraphservice.dto.GenerateData
+import java.io.Serializable
 
 @Component
-class ClientSubGraphPipeLine : SubGraphPipeLine {
+class ClientSubGraphPipeLine : SubGraphPipeLine, Serializable {
     companion object {
         val logger: Logger = LoggerFactory.getLogger(ClientSubGraphPipeLine::class.java)
     }
+
+    @Autowired
+    lateinit var generateData: GenerateData
 
     override fun build(): Pipeline {
 
         val pipeline = Pipeline.create()
         val readFrom = pipeline.readFrom(Sources.fileWatcher("D:\\temp\\1"))
-        val withoutTimestamps = readFrom
+        val mainStream = readFrom
             .withoutTimestamps()
-
-        val filter = withoutTimestamps.setName("devide by 2").map { it.toInt() }.filter { it % 2 == 0 }.map { it.toString() }
-
-//        val filter1 = withoutTimestamps.setName("devide by 3").map { it.toInt() }.filter { it % 3 == 0 }.map { it.toString() }
-
+        val clientCheckStream = mainStream
+            .setName("clientCheckStream")
+            .map { CheckResult(generateData.getClient(it)) }
 
 
-        withoutTimestamps
-            .merge(filter)
-//            .merge(filter1)
-            .peek { q ->
-                logger.info("new string added $q")
-                q
+        val goodClientStream = clientCheckStream
+            .setName("goodClient")
+            .map {
+                val (cl, ck) = it
+                ck.add(Check("goodClient", cl.goodClient))
+                it
             }
-            .writeTo(Sinks.logger());
+
+        val moreThan18 = clientCheckStream
+            .setName("more than 18")
+            .map {
+                val (cl, ck) = it
+                ck.add(Check("more than 18", cl.age.toInt() >= 18))
+                it
+            }
+
+        clientCheckStream
+            .merge(goodClientStream)
+            .merge(moreThan18)
+            .map { "Client " + it.ent.id.value() + "\n" + it.res.joinToString("\n") { ck -> ck.nameCheck + " -> " + ck.res } + "\n=======================================" }
+            .writeTo(Sinks.files("D:\\temp\\res"))
         return pipeline
     }
 

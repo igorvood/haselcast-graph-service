@@ -18,6 +18,13 @@ abstract class EntityTemplate<ID_TYPE>(
 
     override fun value(): EntityTemplate<ID_TYPE> = this
 
+    inline fun <reified Q> fieldValue(name: String) = meta.property
+        .filter { prop -> prop.name == name }
+        .map { prop -> prop.function(this, prop.name)  }
+        .map { q->q.value() }
+        .map { w-> w as Q }
+        .first()
+
     fun getJson(): JsonObject {
         meta.ck.forEach { ck ->
             val (name, function) = ck

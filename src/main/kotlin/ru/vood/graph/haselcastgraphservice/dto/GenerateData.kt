@@ -2,11 +2,12 @@ package ru.vood.graph.haselcastgraphservice.dto
 
 import org.springframework.stereotype.Service
 import ru.vood.graph.haselcastgraphservice.dto.meta.ClientMeta.clientMeta
+import java.io.Serializable
 
 @Service
-class GenerateData {
+class GenerateData: Serializable {
 
-    fun getClient(id: String): Client = Client(id,clientMeta)
+    fun getClient(id: String): Client = Client(id, clientMeta)
 
     fun getJobClient(id: String): Set<ClientJob> {
         val client = getClient(id)

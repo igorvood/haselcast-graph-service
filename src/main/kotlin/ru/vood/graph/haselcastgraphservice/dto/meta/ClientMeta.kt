@@ -9,6 +9,8 @@ import ru.vood.graph.haselcastgraphservice.dto.dsl.StandardFunction.stdNum
 import ru.vood.graph.haselcastgraphservice.dto.dsl.StandardFunction.stdStr
 import ru.vood.graph.haselcastgraphservice.dto.dsl.entity
 import ru.vood.graph.haselcastgraphservice.dto.dsl.genVal
+import java.math.BigDecimal
+import kotlin.math.abs
 
 object ClientMeta {
 
@@ -20,6 +22,9 @@ object ClientMeta {
             val name by string() genVal stdStr()
             val goodClient by bool() genVal stdBool()
             val salary by number() genVal stdNum()
+            val age by number() genVal { et, pn ->
+                BigDecimal(abs(et.id.hashCode() + pn.hashCode())%100)
+            }
             val birthDate by date() genVal stdDate()
 
 

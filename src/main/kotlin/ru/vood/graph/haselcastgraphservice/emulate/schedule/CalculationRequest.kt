@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component
 import ru.vood.graph.haselcastgraphservice.dto.GenerateData
 import ru.vood.graph.haselcastgraphservice.emulate.queue.ExternalData.calculationQueue
 import java.io.File
+import javax.annotation.PostConstruct
 import kotlin.math.abs
 import kotlin.random.Random
 
@@ -25,6 +26,10 @@ class CalculationRequest {
     private val file = File("D:\\temp\\1\\Stream.file")
 //    private val file2 = File("D:\\temp\\2\\Stream.file")
 
+    @PostConstruct
+    private fun deleteFile(){
+        file.deleteOnExit()
+    }
 
     @Scheduled(fixedRate = 10000)
     fun createRequest() {
