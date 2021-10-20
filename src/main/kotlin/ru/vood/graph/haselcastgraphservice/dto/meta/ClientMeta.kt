@@ -11,6 +11,9 @@ import ru.vood.graph.haselcastgraphservice.dto.dsl.entity
 import ru.vood.graph.haselcastgraphservice.dto.dsl.genVal
 
 object ClientMeta {
+
+    val clientMeta = standardMeta()
+
     fun standardMeta(): MetaEntity<String> {
         val clientMeta by entity<String> {
             val id by string() genVal { q, w -> q.id.value() }
