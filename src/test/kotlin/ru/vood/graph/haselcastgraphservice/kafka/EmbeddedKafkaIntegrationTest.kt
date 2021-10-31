@@ -28,7 +28,6 @@ internal class EmbeddedKafkaIntegrationTest {
         producer.send(topic, "Sending with own simple KafkaProducer")
         consumer.getLatch().await(10000, TimeUnit.MILLISECONDS)
         Assertions.assertEquals(consumer.getLatch().count, 0L)
-
         Assertions.assertTrue(consumer.payload!!.contains("embedded-test-topic"))
     }
 }
