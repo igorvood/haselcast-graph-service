@@ -29,8 +29,6 @@ class ClientSubGraphPipeLine : SubGraphPipeLine, Serializable {
         val clientCheckStream = mainStream
             .setName("clientCheckStream")
             .map { CheckResult(generateData.getClient(it)) }
-
-
         val goodClientStream = clientCheckStream
             .setName("goodClient")
             .map {
@@ -52,6 +50,8 @@ class ClientSubGraphPipeLine : SubGraphPipeLine, Serializable {
             .merge(moreThan18)
             .map { "Client " + it.ent.id.value() + "\n" + it.res.joinToString("\n") { ck -> ck.nameCheck + " -> " + ck.res } + "\n=======================================" }
             .writeTo(Sinks.files("D:\\temp\\res"))
+
+        //--------------------
         return pipeline
     }
 
