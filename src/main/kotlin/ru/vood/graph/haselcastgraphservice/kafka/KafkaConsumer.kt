@@ -12,7 +12,7 @@ import java.util.concurrent.CountDownLatch
 @Component
 class KafkaConsumer {
     private val latch: CountDownLatch = CountDownLatch(1)
-    var payload: String? = null
+    lateinit var payload: String
 
     @KafkaListener(topics = ["\${test.topic}"])
     fun receive(consumerRecord: ConsumerRecord<String, SomeData>) {
