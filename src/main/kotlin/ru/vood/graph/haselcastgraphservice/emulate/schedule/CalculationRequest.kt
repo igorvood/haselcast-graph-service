@@ -4,15 +4,14 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.scheduling.annotation.Scheduled
-import org.springframework.stereotype.Component
 import ru.vood.graph.haselcastgraphservice.dto.GenerateData
-import ru.vood.graph.haselcastgraphservice.emulate.queue.ExternalData.calculationQueue
 import java.io.File
 import javax.annotation.PostConstruct
 import kotlin.math.abs
 import kotlin.random.Random
 
-@Component
+//@Component
+@Deprecated("Была проба на файлах")
 class CalculationRequest {
     companion object {
         val logger: Logger = LoggerFactory.getLogger(CalculationRequest::class.java)
@@ -27,7 +26,7 @@ class CalculationRequest {
 //    private val file2 = File("D:\\temp\\2\\Stream.file")
 
     @PostConstruct
-    private fun deleteFile(){
+    private fun deleteFile() {
         file.deleteOnExit()
     }
 
@@ -36,7 +35,7 @@ class CalculationRequest {
 
         val calculationId = abs(random.nextInt())
         logger.info("Request calculation $calculationId")
-        file.appendText(calculationId.toString()+"\n")
+        file.appendText(calculationId.toString() + "\n")
 
 //        val calculationId2 = abs(random.nextInt(15))
 //        logger.info("Request calculation $calculationId2")
